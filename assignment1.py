@@ -3,17 +3,16 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 
-# URLs of product
 url_tejar = 'https://www.tejar.pk/lenovo-tab-m10-fhd-plus-2nd-gen'
 url_surmawala = 'https://surmawala.pk/lenovo-tab-m10-gen2-2gb-ram-32gb-rom-10-1-inch-android-10'
 
-# Function to scrape data
+# scrapeing data
 def scrape_data(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     return soup
 
-# Function to extract data
+#  extracting data
 def extract_data(soup, site_name):
     if site_name == 'Tejar':
         
@@ -53,15 +52,14 @@ def extract_data(soup, site_name):
 
 
 
-# Scrape data from websites
+
 data_tejar = scrape_data(url_tejar)
 data_surmawala = scrape_data(url_surmawala)
 
-# Extract data into a structured form
+
 product_tejar = extract_data(data_tejar, 'Tejar')
 product_surmawala = extract_data(data_surmawala, 'Surmawala')
 
-# Put data into a pandas DataFrame
 df = pd.DataFrame([product_tejar, product_surmawala])
 
 # Remove any characters that are not a digit, a decimal point, or a comma
